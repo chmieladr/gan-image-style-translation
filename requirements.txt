@@ -3,7 +3,6 @@ numpy
 opencv-python>=4.9.0.80
 pandas
 pillow>=10.3.0
-python-dotenv>=1.0.1
 pydot>=1.4.2
 tensorflow==2.10
 tqdm>=4.66.4
