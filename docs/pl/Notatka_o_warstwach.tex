@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+
+\geometry{margin=0.75in}
+
+\begin{document}
+
+\title{\textbf{Notatka o warstwach}}
+\author{\textbf{Adrian Chmiel}}
+\date{4 czerwca 2024}
+\maketitle
+
+\section{Sequential}
+\begin{itemize}
+    \item umożliwia tworzenie modeli warstw w kolejności, w której są one dodawane
+    \item prosty sposób na budowanie modeli w \textit{tf.keras}
+    \item do budowania modeli, gdzie warstwy są stosowane jedna po drugiej w sposób liniowy
+\end{itemize}
+
+\section{Concatenate}
+\begin{itemize}
+    \item łączy listę tensorów wzdłuż określonego wymiaru
+    \item do łączenia wyjść z różnych warstw, cechy z wcześniejszych warstw są łączone z cechami z późniejszych warstw
+\end{itemize}
+
+\section{Conv2D}
+\begin{itemize}
+    \item warstwa konwolucyjna 2D, stosowana do przetwarzania danych obrazowych
+    \item stosuje filtry konwolucyjne, które przesuwają się po danych wejściowych, aby wyodrębnić cechy
+    \item do ekstrakcji cech z obrazów, takich jak krawędzie, tekstury, itp.
+\end{itemize}
+
+\section{Conv2DTranspose}
+\begin{itemize}
+    \item odwrotna warstwa konwolucyjna 2D, stosowana do generowania wyższej rozdzielczości obrazu z niższej rozdzielczości
+    \item do zwiększania rozdzielczości obrazów
+    \item do odwracania operacji konwolucji
+\end{itemize}
+
+\section{ZeroPadding2D}
+\begin{itemize}
+    \item dodaje wypełnienie zerami wokół krawędzi danych wejściowych
+    \item pozwala na kontrolowanie rozmiaru wyjściowego obrazu po zastosowaniu warstwy konwolucyjnej
+    \item do utrzymania rozmiaru przestrzennego danych wejściowych po konwolucji
+\end{itemize}
+
+\section{LeakyReLU}
+\begin{itemize}
+    \item wariant funkcji aktywacji ReLU, który pozwala na niewielki gradient, gdy jednostka nie jest aktywowana (wartość ujemna)
+    \item do zapobiegania problemowi "zanikających gradientów"
+\end{itemize}
+
+\section{InstanceNormalization / BatchNormalization}
+\begin{itemize}
+    \item normalizuje dane wejściowe dla każdej próbki niezależnie
+    \item pozwala na stabilizację procesu trenowania i szybkie zbieżności
+    \item do normalizacji cech wejściowych w sieciach neuronowych, szczególnie w modelach generatywnych i stylizacji obrazów
+\end{itemize}
+
+\section{ResizeLayer}
+\begin{itemize}
+    \item zmienia rozmiar danych wejściowych do określonego wymiaru
+    \item do przeskalowywania obrazów w sieciach neuronowych (w celu standaryzacji rozmiarów obrazów wejściowych lub wyjściowych)
+\end{itemize}
+
+\end{document}

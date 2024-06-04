@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+
+\geometry{margin=0.75in}
+
+\begin{document}
+
+\title{\textbf{Note about Layers}}
+\author{\textbf{Adrian Chmiel}}
+\date{June 4, 2024}
+\maketitle
+
+\section{Sequential}
+\begin{itemize}
+    \item allows for creating layers in the order they are added
+    \item a simple way to build models in \textit{tf.keras}
+    \item for building models where layers are applied one after the other in a linear manner
+\end{itemize}
+
+\section{Concatenate}
+\begin{itemize}
+    \item concatenates a list of tensors along a specified axis
+    \item for combining outputs from different layers, features from earlier layers are combined with features from later layers
+\end{itemize}
+
+\section{Conv2D}
+\begin{itemize}
+    \item 2D convolutional layer, used for processing image data
+    \item applies convolutional filters that move across input data to extract features
+    \item for feature extraction from images, such as edges, textures, etc.
+\end{itemize}
+
+\section{Conv2DTranspose}
+\begin{itemize}
+    \item inverse 2D convolutional layer, used for generating higher resolution images from lower resolution ones
+    \item for increasing the resolution of images
+    \item for reversing convolution operations
+\end{itemize}
+
+\section{ZeroPadding2D}
+\begin{itemize}
+    \item adds zero padding around the edges of input data
+    \item allows for controlling the size of the output image after applying a convolutional layer
+    \item for maintaining spatial size of input data after convolution
+\end{itemize}
+
+\section{LeakyReLU}
+\begin{itemize}
+    \item a variant of the ReLU activation function that allows for a small gradient when the unit is not activated (negative value)
+    \item for preventing the "vanishing gradients" problem
+\end{itemize}
+
+\section{InstanceNormalization / BatchNormalization}
+\begin{itemize}
+    \item normalizes input data for each sample independently
+    \item allows for stabilizing the training process and rapid convergence
+    \item for normalizing input features in neural networks, especially in generative models and image stylization
+\end{itemize}
+
+\section{ResizeLayer}
+\begin{itemize}
+    \item resizes input data to a specified dimension
+    \item for resizing images in neural networks (for standardizing input or output image sizes)
+\end{itemize}
+
+\end{document}
