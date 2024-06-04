@@ -2,6 +2,7 @@
 Python application that translates the style of given input image to one of the following:
 - **Vincent Van Gogh art**
 - **Comic book**
+
 The style-translated image is produced in _256x256_ resolution, then upscaled to _512x512_ using another network.
 
 > **Note!** The output will always be **512x512 .png image**, no matter what the initial image resolution and format were.
