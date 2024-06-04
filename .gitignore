@@ -17,6 +17,8 @@ notebooks/model.png
 src/__pycache__/
 
 # Ignore all temporary image files
+tmp/*.jpg
+tmp/*.jpeg
 tmp/*.png
 
 # Ignore files produced by LaTeX
@@ -27,6 +29,7 @@ tmp/*.png
 *.synctex
 *.synctex(busy)
 *.synctex.gz
+*.toc
 
 # Ignore "to-do" list
 todo.md

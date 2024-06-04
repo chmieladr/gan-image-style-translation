@@ -86,9 +86,9 @@ class GUI(tk.Tk):
             self.style_label.config(text="Missing style '.weights.h5' file!")
             return
 
-        self.final_file_path = f"""{self.file_path[0:-4]}_{
-        "van_gogh" if self.option_var.get() == "Vincent Van Gogh Art" else "cartoon"}.png"""  # upscaling
-        self.style_label.config(text="Upscaling the image!")
+        self.final_file_path = f"""{self.file_path[0:-4] if not self.file_path.endswith(".jpeg") else self.file_path[0:-5]
+        }_{"cartoon" if self.option_var.get() == "Cartoon" else "van_gogh"}.png"""
+        self.style_label.config(text="Upscaling the image!")  # upscaling
         try:
             upscale(self.final_file_path, original_img_path=self.file_path)
         except FileNotFoundError:

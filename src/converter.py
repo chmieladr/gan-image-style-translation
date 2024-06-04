@@ -81,7 +81,7 @@ def convert_cartoon(img_name: str):
 
 
 def sr_preprocess_image(styled_image: str):
-    img = Image.open(styled_image).convert('RGB')
+    img = Image.open(styled_image).convert('RGB').resize((256, 256))
     return np.array([np.array(img)], dtype='float32') / 127.5 - 1
 
 

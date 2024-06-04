@@ -28,9 +28,13 @@ def process_images(input_directory: str, output_directory: str):
                     img_final.save(output_path)
 
 
-directories = ['../dataset/natural_images/flower', '../dataset/VincentVanGogh', '../dataset/Familyguy']
+directories = ['../dataset/natural_images/flower',
+               '../dataset/VincentVanGogh',
+               '../dataset/Familyguy',
+               '../tmp',
+               ]
 
 if __name__ == '__main__':
-    input_dir = directories[2]
+    input_dir = directories[3]
     output_dir = input_dir + '_standardized'
     process_images(input_dir, output_dir)
