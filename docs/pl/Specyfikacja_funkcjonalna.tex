@@ -88,7 +88,7 @@ Zamysł działania aplikacji widoczny jest poniżej:
     \item Wybór pliku oraz stylu konwersji
     \item Translacja stylu obrazu przy wykorzystaniu \textbf{CycleGAN} \\
 \textit{Obraz powstały w tym procesie ma rozdzielczość 256x256.}
-    \item Upscaling obrazu przy wykorzystaniu \textbf{PatchGAN} do rozdzielczości 512x512
+    \item Upscaling obrazu przy wykorzystaniu \textbf{SRGAN} do rozdzielczości 512x512
     \item Zapisanie obrazu w formacie \textit{.png}
 \end{enumerate}
 Istotnym faktem jest, że aplikacja \textbf{nie zadziała}, jeżeli nie znajdzie odpowiednich wag modelu, o czym użytkownik zostanie poinformowany błędem.
@@ -99,7 +99,7 @@ Program opiera się na dwóch modelach sieci GAN:
 \begin{itemize}
     \setlength\itemsep{0pt}
     \item \textbf{CycleGAN}
-    \item \textbf{PatchGAN}
+    \item \textbf{SRGAN} (z dyskryminatorem \textit{PatchGAN})
 \end{itemize}
 \textbf{GAN} \textit{(Generative Adversarial Network)} to rodzaj sztucznej sieci neuronowej, która składa się z dwóch modeli: \textbf{generatora} oraz \textbf{dyskryminatora}.
 Generator ma za zadanie generować nowe obrazy, które są podobne do tych ze zbioru danych, natomiast dyskryminator ma za zadanie rozróżniać, czy obraz pochodzi z generatora, czy ze zbioru danych.
@@ -145,13 +145,13 @@ Na następnych stronach widoczne są wizualizacje modeli wykorzystywanych w apli
         \vspace{3mm} \\
         \includegraphics[height=0.95\textheight]{../imgs/cyclegan_discriminator.png}
         \newpage
-    \item \textbf{PatchGAN - Generator}
+    \item \textbf{SRGAN - Generator}
         \vspace{3mm} \\
-        \includegraphics[height=0.95\textheight]{../imgs/patchgan_generator.png}
+        \includegraphics[height=0.95\textheight]{../imgs/srgan_generator.png}
         \newpage
-    \item \textbf{PatchGAN - Dyskryminator}
+    \item \textbf{SRGAN - Dyskryminator \textit{(PatchGAN)}}
         \vspace{3mm} \\
-        \includegraphics[height=0.95\textheight]{../imgs/patchgan_discriminator.png}
+        \includegraphics[height=0.95\textheight]{../imgs/srgan_discriminator.png}
         \newpage
 \end{enumerate}
 

@@ -69,9 +69,9 @@ class CycleGenerator(Generator):
                          ]
 
 
-class PatchGenerator(Generator):
+class SRGenerator(Generator):
     def __init__(self, strides: int = 4):
-        super(PatchGenerator, self).__init__(strides=strides)
+        super(SRGenerator, self).__init__(strides=strides)
         self.prepare_stacks()
 
     def prepare_stacks(self):

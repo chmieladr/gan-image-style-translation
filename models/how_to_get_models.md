@@ -8,11 +8,11 @@ If you don't change the save directory, they will be saved in the `models` folde
 
 Make sure that the names of models are as follows (otherwise the main program won't be able to find them):
 
-| Model                                                                  | Filename               |
-|------------------------------------------------------------------------|------------------------|
-| **CycleGAN** responsible for **Van Gogh Art** style conversion         | `van_gogh.weights.h5`  |
-| **CycleGAN** responsible for **Cartoon** style conversion              | `cartoon.weights.h5`   | 
-| **PatchGAN** responsible for **upscaling** output image to **512x512** | `patch_gan.weights.h5` |
+| Model                                                               | Filename              |
+|---------------------------------------------------------------------|-----------------------|
+| **CycleGAN** responsible for **Van Gogh Art** style conversion      | `van_gogh.weights.h5` |
+| **CycleGAN** responsible for **Cartoon** style conversion           | `cartoon.weights.h5`  | 
+| **SRGAN** responsible for **upscaling** output image to **512x512** | `srgan.weights.h5`    |
 
 > **Note!** The files above contain only the **generator's** weights as the entire model isn't necessary for the main app.
 > However, inside of _Google Drive_ provided above you can also find the whole model files in case you want to use them for further research.

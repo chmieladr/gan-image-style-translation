@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
-from generator import CycleGenerator, PatchGenerator
+from generator import CycleGenerator, SRGenerator
 
 
 def cycle_preprocess_image(img_name: str, reduce_colours: int = None):
@@ -80,22 +80,22 @@ def convert_cartoon(img_name: str):
     plot_and_save(img, conversion, img_name, compare=False)
 
 
-def patch_preprocess_image(styled_image: str):
+def sr_preprocess_image(styled_image: str):
     img = Image.open(styled_image).convert('RGB')
     return np.array([np.array(img)], dtype='float32') / 127.5 - 1
 
 
-def initialize_patch_gan(weights_path: str = "../models/patch_gan.weights.h5") -> CycleGenerator:
-    patch_generator = PatchGenerator().build()
-    patch_generator.load_weights(weights_path)
-    return patch_generator
+def initialize_srgan(weights_path: str = "../models/srgan.weights.h5") -> SRGenerator:
+    sr_generator = SRGenerator().build()
+    sr_generator.load_weights(weights_path)
+    return sr_generator
 
 
 def upscale(img_name: str, original_img_path: str, style_converted_img_path: str = "../tmp/partial.png"):
-    generator = initialize_patch_gan()
+    generator = initialize_srgan()
 
-    org = patch_preprocess_image(original_img_path)
-    img = patch_preprocess_image(style_converted_img_path)
+    org = sr_preprocess_image(original_img_path)
+    img = sr_preprocess_image(style_converted_img_path)
 
     pred = generator(img, training=False)
 

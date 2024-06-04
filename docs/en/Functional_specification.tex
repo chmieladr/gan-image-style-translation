@@ -88,7 +88,7 @@ The application's operation concept is visible below:
     \item File selection and conversion style
     \item Image style translation using \textbf{CycleGAN} \\
 \textit{The resulting image has a resolution of 256x256.}
-    \item Image upscaling using \textbf{PatchGAN} to a resolution of 512x512
+    \item Image upscaling using \textbf{SRGAN} to a resolution of 512x512
     \item Saving the image in the \textit{.png} format
 \end{enumerate}
 Important fact is that the application \textbf{will not work} if it does not find the appropriate model weights, which the user will be informed about by an error.
@@ -99,7 +99,7 @@ The program is based on two GAN network models:
 \begin{itemize}
     \setlength\itemsep{0pt}
     \item \textbf{CycleGAN}
-    \item \textbf{PatchGAN}
+    \item \textbf{SRGAN} (with \textit{PatchGAN} discriminator)
 \end{itemize}
 \textbf{GAN} \textit{(Generative Adversarial Network)} is a type of artificial neural network that consists of two models: \textbf{generator} and \textbf{discriminator}.
 The generator's task is to generate new images that are similar to those from the dataset, while the discriminator's task is to distinguish whether the image comes from the generator or the dataset.
@@ -145,13 +145,13 @@ On the following pages, visualizations of the models used in the application are
         \vspace{3mm} \\
         \includegraphics[height=0.95\textheight]{../imgs/cyclegan_discriminator.png}
         \newpage
-    \item \textbf{PatchGAN - Generator}
+    \item \textbf{SRGAN - Generator}
         \vspace{3mm} \\
-        \includegraphics[height=0.95\textheight]{../imgs/patchgan_generator.png}
+        \includegraphics[height=0.95\textheight]{../imgs/srgan_generator.png}
         \newpage
-    \item \textbf{PatchGAN - Discriminator}
+    \item \textbf{SRGAN - Discriminator \textit{(PatchGAN)}}
         \vspace{3mm} \\
-        \includegraphics[height=0.95\textheight]{../imgs/patchgan_discriminator.png}
+        \includegraphics[height=0.95\textheight]{../imgs/srgan_discriminator.png}
         \newpage
 \end{enumerate}
 

@@ -32,7 +32,7 @@ The application's GUI should now show up.
 
 ## Model
 This project uses **CycleGANs** to translate the style of input image.
-Then uses **PatchGAN** to upscale the output to higher resolution. \
+Then uses **SRGAN** with **PatchGAN** discriminator to upscale the output to higher resolution. \
 All models are initialized using tensorflow's `tf.keras` API. \
 Models can be either trained by yourself using _Jupyter Notebook_ files available in `notebooks` subfolder
 or downloaded using the link available in `models/how_to_get_models.md` file.
@@ -92,7 +92,7 @@ This project wouldn't exist without the sources below. You can check them out fo
 - **CycleGAN** - Style transferring
   - https://www.kaggle.com/code/mehmetlaudatekman/style-transfering-with-van-gogh-cyclegan
   - https://junyanz.github.io/CycleGAN/ 
-- **PatchGAN** - Image upscaling
+- **GAN-based Image upscaling**
   - https://www.kaggle.com/code/amanrajput27/gan-based-image-upscaling
   - https://www.tensorflow.org/tutorials/generative/pix2pix
   - https://arxiv.org/abs/1609.04802

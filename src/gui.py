@@ -93,7 +93,7 @@ class GUI(tk.Tk):
             upscale(self.final_file_path, original_img_path=self.file_path)
         except FileNotFoundError:
             self.image_label.config(text="Upscaling model initialization failed!")
-            self.style_label.config(text="Missing PatchGAN '.weights.h5' file!")
+            self.style_label.config(text="Missing Super Resolution GAN '.weights.h5' file!")
             return
 
         self.image_label.config(text="Style conversion successful!")
