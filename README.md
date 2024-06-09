@@ -17,7 +17,8 @@ conda activate Ganics
 conda install jupyter -y
 pip install -r requirements.txt
 ```
-If you want to utilise your _NVIDIA GPU_, you should also execute the following command:
+If you want to utilise your _NVIDIA GPU_, you should also execute the following command
+(provided that you have other essential software installed):
 ```shell
 conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 -y
 ```

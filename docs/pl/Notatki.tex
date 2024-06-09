@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\geometry{margin=0.7in}
+
+\begin{document}
+
+\title{\textbf{Notatki}
+\\ \large{\textit{Ganics}}}
+\author{\textbf{Adrian Chmiel}}
+\date{9 czerwca 2024}
+\maketitle
+
+\section{Introduction}
+Plik ten zawiera różne notatki, które pomogły mi lepiej zrozumieć, jak działają różne GAN-y oraz jakie funkcje pełnią poszczególne warstwy. W tym dokumencie zawarte są jedynie najważniejsze informacje, które zgromadziłem podczas wykonywania projektu w celach dydaktycznych.
+
+\section{GAN-y}
+\subsection{Zwykły GAN}
+\begin{itemize}
+    \item jeden generator i jeden dyskryminator
+    \item trening na sparowanych danych mających na celu generowanie realistycznych ogólnych obrazów
+\end{itemize}
+
+\subsection{CycleGAN}
+\begin{itemize}
+    \item dwa generatory i dwa dyskryminatory
+    \item trening na niesparowanych danych mających na celu konwersję stylu obrazów
+    \item \textbf{cykl konsystencji straty} - obraz przetłumaczony z A na B, a następnie z powrotem z B na A powinien być podobny do oryginalnego obrazu
+\end{itemize}
+
+\subsection{SRGAN}
+\begin{itemize}
+    \item jeden generator i jeden dyskryminator
+    \item trening mający na celu generowanie wysokiej jakości obrazów
+    \item \textbf{połączenia resztkowe} - przekazywanie informacji z poprzednich warstw do kolejnych z pominięciem warstw pośrednich
+\end{itemize}
+
+\subsection{Dyskryminator PatchGAN}
+\begin{itemize}
+    \item dyskryminator oceniający obrazy na poziomie patchy
+    \item zamiast oceny całego obrazu, ocenia on poszczególne fragmenty obrazu
+    \item pozwala na bardziej szczegółową ocenę obrazów
+    \item często stosowany jako część \textit{SRGAN}-ów
+\end{itemize}
+\newpage
+
+\section{Warstwy \textit{tf.keras}}
+\subsection{Sequential}
+\begin{itemize}
+    \item umożliwia tworzenie modeli warstw w kolejności, w której są one dodawane
+    \item prosty sposób na budowanie modeli w \textit{tf.keras}
+    \item do budowania modeli, gdzie warstwy są stosowane jedna po drugiej w sposób liniowy
+\end{itemize}
+
+\subsection{Concatenate}
+\begin{itemize}
+    \item łączy listę tensorów wzdłuż określonego wymiaru
+    \item do łączenia wyjść z różnych warstw, cechy z wcześniejszych warstw są łączone z cechami z późniejszych warstw
+\end{itemize}
+
+\subsection{Conv2D}
+\begin{itemize}
+    \item warstwa konwolucyjna 2D, stosowana do przetwarzania danych obrazowych
+    \item stosuje filtry konwolucyjne, które przesuwają się po danych wejściowych, aby wyodrębnić cechy
+    \item do ekstrakcji cech z obrazów, takich jak krawędzie, tekstury, itp.
+\end{itemize}
+
+\subsection{Conv2DTranspose}
+\begin{itemize}
+    \item odwrotna warstwa konwolucyjna 2D, stosowana do generowania wyższej rozdzielczości obrazu z niższej rozdzielczości
+    \item do zwiększania rozdzielczości obrazów
+    \item do odwracania operacji konwolucji
+\end{itemize}
+
+\subsection{ZeroPadding2D}
+\begin{itemize}
+    \item dodaje wypełnienie zerami wokół krawędzi danych wejściowych
+    \item pozwala na kontrolowanie rozmiaru wyjściowego obrazu po zastosowaniu warstwy konwolucyjnej
+    \item do utrzymania rozmiaru przestrzennego danych wejściowych po konwolucji
+\end{itemize}
+
+\subsection{LeakyReLU}
+\begin{itemize}
+    \item wariant funkcji aktywacji ReLU, który pozwala na niewielki gradient, gdy jednostka nie jest aktywowana (wartość ujemna)
+    \item do zapobiegania problemowi "zanikających gradientów"
+\end{itemize}
+
+\subsection{InstanceNormalization / BatchNormalization}
+\begin{itemize}
+    \item normalizuje dane wejściowe dla każdej próbki niezależnie
+    \item pozwala na stabilizację procesu trenowania i szybkie zbieżności
+    \item do normalizacji cech wejściowych w sieciach neuronowych, szczególnie w modelach generatywnych i stylizacji obrazów
+\end{itemize}
+
+\subsection{ResizeLayer}
+\begin{itemize}
+    \item zmienia rozmiar danych wejściowych do określonego wymiaru
+    \item do przeskalowywania obrazów w sieciach neuronowych (w celu standaryzacji rozmiarów obrazów wejściowych lub wyjściowych)
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\geometry{margin=0.7in}
+
+\begin{document}
+
+\title{\textbf{Project report and specification}
+\\ \large{\textit{Ganics}}}
+\author{\textbf{Adrian Chmiel}}
+\date{\today}
+\maketitle
+
+\section{Project's goal}
+The aim of the project is to utilize GAN networks for generating images with translated style. The program offers two possible style conversion modes:
+\begin{enumerate}[label=\arabic*.]
+    \setlength\itemsep{0pt}
+    \item \textbf{Vincent Van Gogh Art} - images will resemble the artworks of Vincent Van Gogh
+    \item \textbf{Cartoon} - images will resemble pictures from cartoons (or comics)
+\end{enumerate}
+After the style is transformed, the image is upscaled to a resolution of \textit{512x512}. The final image is saved in the \textit{.png} format.
+
+\section{Technologies used}
+The program was written in \textbf{Python 3.10}. It uses the following libraries:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item \textbf{matplotlib} - for creating plots and visualizing data
+    \item \textbf{numpy} - for matrix operations
+    \item \textbf{opencv-python} - for image processing
+    \item \textbf{pandas} - for data analysis
+    \item \textbf{pillow} - for image processing
+    \item \textbf{pydot} - for visualizing model structure
+    \item \textbf{tensorflow} - for creating and training GAN models
+    \item \textbf{tkinter} - for creating a simple graphical interface
+    \item \textbf{tqdm} - for displaying progress in model training
+\end{itemize}
+I have used Python programming language because it is widely used in the field of machine learning and artificial intelligence. It offers a wide range of libraries and tools that facilitate the development of such projects. Out of many machine learning libraries, I have chosen \textbf{Tensorflow} because it is one of the most popular libraries for creating neural networks and I have also used it in the past for other projects.
+\vspace{3mm} \\
+For this project I have decided to use \textbf{Python 3.10} version mostly because it is the last version supported by \textit{Tensorflow 2.10}. Newer versions of this library don't natively support GPU acceleration on \textbf{Windows} operating system, which is crucial for the learning process as it heavily reduces the time needed for training the network. While I could have restricted the project to \textit{Linux} systems, I wanted to make it more accessible.
+\vspace{3mm} \\
+Apart from that I have also utilized \textbf{Jupyter Notebooks} for training the models. They're main advantage is the ability to run code in small chunks, which makes it easier to find the issues and understand the code. They are available in the \textit{notebooks} directory.
+
+\section{Launching the program}
+In order to run the application directly from the \textbf{source code}, it is recommended to create a new virtual environment and install the required libraries/packages in it.
+Assuming that we are using \textit{conda}, we can do this with the following commands:
+\begin{verbatim}
+conda create -n Ganics python=3.10 -y
+conda activate Ganics
+conda install jupyter -y
+pip install -r requirements.txt
+\end{verbatim}
+\textit{The installation of Jupyter can be skipped if we do not plan to use notebooks.}
+\vspace{3mm} \\
+For NVIDIA graphics card owners, it is also worth running the following command, which will enable the use of CUDA (provided that you have other essential software installed):
+\begin{verbatim}
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 -y
+\end{verbatim}
+The program can be launched by calling the \textbf{\textit{main.py}} file:
+\begin{verbatim}
+python src/main.py
+\end{verbatim}
+Program has been tested on both \textit{Windows} and \textit{Linux} operating systems.
+
+\section{Graphical interface}
+\begin{multicols}{2}
+The graphical interface of the program was created using the \textit{tkinter} library. It allows:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item Selection of the input file
+    \item Selection of the conversion style
+    \item Converting and saving the image
+    \item Preview of the image before and after conversion
+\end{itemize}
+Sample screenshot of the user interface is visible on the right.
+\vspace{5\baselineskip} \\
+\columnbreak
+\includegraphics[width=0.475\textwidth]{../imgs/gui.png}
+\end{multicols}
+
+\section{Input and output files}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Main application} \\
+The program allows selecting the path to the input file that will be converted. It is worth noting that the input file must be an image in the \textit{.jpg}, \textit{.jpeg}, or \textit{.png} format.
+\vspace{3mm} \\
+The output file, regardless of the initial format, is always an image in the \textit{.png} format with a resolution of \textit{512x512}.
+    \item \textbf{Notebooks} \\
+When it comes to notebooks, we provide entire sets of images as input (more information below), which will be used to train the model. As output, we receive visualizations illustrating how the model performs after training and an exported model weights file, which is later used as a component of the main application.
+\end{enumerate}
+
+\section{How the application works}
+The application's operation concept is visible below:
+\begin{enumerate}[label=\arabic*.]
+    \item File selection and conversion style
+    \item Image style translation using \textbf{CycleGAN} \\
+\textit{The resulting image has a resolution of 256x256.}
+    \item Image upscaling using \textbf{SRGAN} to a resolution of 512x512
+    \item Saving the image in the \textit{.png} format
+\end{enumerate}
+Important fact is that the application \textbf{will not work} if it does not find the appropriate model weights, which the user will be informed about by an error.
+In such a case, it is necessary to either run the notebooks to train the model, or download the ready-made files available on \textit{Google Drive} under the link in the \textit{how\_to\_get\_models.md} file.
+
+\section{Theory}
+The program is based on two GAN network models:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item \textbf{CycleGAN}
+    \item \textbf{SRGAN} (with \textit{PatchGAN} discriminator)
+\end{itemize}
+\textbf{GAN} \textit{(Generative Adversarial Network)} is a type of artificial neural network that consists of two models: \textbf{generator} and \textbf{discriminator}.
+The generator's task is to generate new images that are similar to those from the dataset, while the discriminator's task is to distinguish whether the image comes from the generator or the dataset.
+The training process involves a competition between both models, where the generator tries to deceive the discriminator, and the discriminator tries to learn to distinguish images.
+As a result, the generator is able to generate images very similar to those from the dataset.
+
+\section{Datasets}
+To obtain datasets for training models, you can extract the available \textit{.zip} files, which contain images selected by me from the datasets listed below. An alternative option is to use the links to these datasets available in the \textit{README.md} file. This approach will allow you to independently choose images that will be used for training.
+\vspace{3mm} \\
+The datasets used for training models are:
+\begin{itemize}
+    \item \textbf{Familyguy} (from the Cartoon Classification dataset) \\
+Used to train CycleGAN responsible for converting the style to a cartoon (or comic).
+    \item \textbf{VincentVanGogh} (from the Vincent Van Gogh Art dataset) \\
+Used to train another CycleGAN responsible for converting the style to Vincent Van Gogh's artworks.
+    \item \textbf{natural\_images} \\
+Sample images, the style of which was transformed into one of the two mentioned above during training.
+    \item \textbf{mscoco} \\
+A dataset that additionally expanded the set of data with natural images used to train the models.
+\end{itemize}
+
+\section{Limitations}
+Style conversion is a relatively complex task, so the training time in notebooks strongly depends on the computational power of the computer. For this reason, it is recommended to use an NVIDIA graphics card, which significantly speeds up the learning process. All notebooks are adapted to use CUDA if available, that is the required software has been installed.
+\vspace{3mm} \\
+It is also worth noting that the cartoon style is relatively simple, so the model will cut off the details of the images during conversion. In the case of too complex images, the result may be unsatisfactory.
+
+\section{Visualization of featured models}
+On the following pages, visualizations of the models used in the application are visible. These visualizations were generated using the \textit{pydot} library. They show both the generator and the discriminator for both models, along with individual layers and their connections. More information is available in the \textit{Notes.pdf} document.
+\newpage
+
+\begin{multicols}{2}
+\subsection{CycleGAN - Generator \vspace{0.25\baselineskip}}
+    \includegraphics[width=0.475\textwidth]{../imgs/cyclegan_generator.png}
+\subsection{CycleGAN - Discriminator}
+    \includegraphics[width=0.475\textwidth]{../imgs/cyclegan_discriminator.png}
+\end{multicols}
+\newpage
+
+\begin{multicols}{2}
+\subsection{SRGAN - Generator \vspace{1.25\baselineskip}}
+    \includegraphics[width=0.475\textwidth]{../imgs/srgan_generator.png}
+\subsection{SRGAN - Discriminator \\ \textit{(PatchGAN)}}
+    \includegraphics[width=0.475\textwidth]{../imgs/srgan_discriminator.png}
+\end{multicols}
+\newpage
+
+\section{Example results}
+Below you can see example images exported from the application. The images on the left are the input images, and the images on the right are the results of the conversion.
+
+\subsection{Vincent Van Gogh Art}
+\includegraphics[width=\textwidth]{../imgs/side_by_side/v1.png}
+\vspace{3mm} \\
+\includegraphics[width=\textwidth]{../imgs/side_by_side/v2.png}
+\vspace{3mm} \\
+\includegraphics[width=\textwidth]{../imgs/side_by_side/v3.png}
+
+\subsection{Cartoon}
+\includegraphics[width=\textwidth]{../imgs/side_by_side/c1.png}
+\vspace{3mm} \\
+\includegraphics[width=\textwidth]{../imgs/side_by_side/c2.png}
+\vspace{3mm} \\
+\includegraphics[width=\textwidth]{../imgs/side_by_side/c3.png}
+
+\section{Conclusions}
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item The program allows for the conversion of images to two different styles: Vincent Van Gogh Art and Cartoon.
+    \item It two models: CycleGAN for style conversion and SRGAN for image upscaling.
+    \item The program has been provided with graphical interface that allows for easy selection of the input file and conversion style.
+    \item The application requires the availability of model weights, which can be obtained by running the notebooks or downloading them from the provided link.
+    \item The program works on both Windows and Linux operating systems.
+    \item Proper choice of epochs amount is crucial for the quality of the final image. It is essential to look at the results and monitor the loss during training to avoid overfitting.
+\end{itemize}
+
+\end{document}

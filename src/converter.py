@@ -38,7 +38,7 @@ def convert(img_name: str, style: str):
 def plot_and_save(img, conversion, img_name: str, tmp_path: str = "../tmp",
                   styled: bool = False, compare: bool = True, upscaled: bool = False):
     if compare:
-        plt.figure(dpi=128, facecolor="#3b3b3b")
+        plt.figure(dpi=320, facecolor="white")
         plt.subplot(1, 2, 1)
         plt.imshow(img[0])
         plt.axis("off")

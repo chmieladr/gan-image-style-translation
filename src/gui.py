@@ -70,7 +70,7 @@ class GUI(tk.Tk):
         self.canvas.pack(pady=(20, 0))
 
     def convert(self):
-        if self.file_path == "None":  # image not selected
+        if self.file_path == "None" or self.file_path == "" or self.file_path is tuple:  # image not selected
             self.image_label.config(text="Select the image first!")
             return
 
@@ -86,8 +86,9 @@ class GUI(tk.Tk):
             self.style_label.config(text="Missing style '.weights.h5' file!")
             return
 
-        self.final_file_path = f"""{self.file_path[0:-4] if not self.file_path.endswith(".jpeg") else self.file_path[0:-5]
-        }_{"cartoon" if self.option_var.get() == "Cartoon" else "van_gogh"}.png"""
+        self.final_file_path = f"""{self.file_path[0:-4] if not self.file_path.endswith(".jpeg")
+        else self.file_path[0:-5]}_{"cartoon" if self.option_var.get() == "Cartoon" else "van_gogh"}.png"""
+
         self.style_label.config(text="Upscaling the image!")  # upscaling
         try:
             upscale(self.final_file_path, original_img_path=self.file_path)
@@ -97,7 +98,7 @@ class GUI(tk.Tk):
             return
 
         self.image_label.config(text="Style conversion successful!")
-        self.style_label.config(text=f"""Result saved at: {self.final_file_path}.png""")
+        self.style_label.config(text=f"""Result saved at: {self.final_file_path}""")
         self.show_image_preview(self.tmp + "/conversion.png", resize_to_square=False)
         self.after(10000, self.quit)  # closes the program after 10 seconds
         clean()  # clears temporary files
@@ -118,7 +119,7 @@ class GUI(tk.Tk):
         if resize_to_square:
             image = image.resize((256, 256))
         else:
-            image = image.resize((image.width, image.height))
+            image = image.resize((563, 256))
         self.selected_image = ImageTk.PhotoImage(image)
         self.canvas.delete("all")
         canvas_width = self.canvas.winfo_width()

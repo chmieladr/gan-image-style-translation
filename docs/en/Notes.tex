@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\geometry{margin=0.7in}
+
+\begin{document}
+
+\title{\textbf{Notes}
+\\ \large{\textit{Ganics}}}
+\author{\textbf{Adrian Chmiel}}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This file contains various notes that helped me learn more about how different Generative Adversarial Networks work and what particular layers do. It is a summary of the most important information I found during the research.
+
+\section{Generative Adversarial Networks}
+\subsection{Basic GAN}
+\begin{itemize}
+    \item one generator and one discriminator
+    \item training on paired data aiming to generate realistic general images
+\end{itemize}
+
+\subsection{CycleGAN}
+\begin{itemize}
+    \item two generators and two discriminators
+    \item training on unpaired data aiming for image style conversion
+    \item \textbf{cycle consistency loss} - an image translated from A to B and then back from B to A should be similar to the original image
+\end{itemize}
+
+\subsection{SRGAN}
+\begin{itemize}
+    \item one generator and one discriminator
+    \item training aiming to generate high-quality images
+    \item \textbf{residual connections} - passing information from previous layers to subsequent layers bypassing intermediate layers
+\end{itemize}
+
+\subsection{PatchGAN Discriminator}
+\begin{itemize}
+    \item discriminator evaluating images at the patch level
+    \item instead of evaluating the entire image, it evaluates individual image patches
+    \item allows for a more detailed evaluation of images
+    \item often used as part of \textit{SRGANs}
+\end{itemize}
+\newpage
+
+\section{Layers \textit{tf.keras}}
+\subsection{Sequential}
+\begin{itemize}
+    \item allows for creating layers in the order they are added
+    \item a simple way to build models in \textit{tf.keras}
+    \item for building models where layers are applied one after the other in a linear manner
+\end{itemize}
+
+\subsection{Concatenate}
+\begin{itemize}
+    \item concatenates a list of tensors along a specified axis
+    \item for combining outputs from different layers, features from earlier layers are combined with features from later layers
+\end{itemize}
+
+\subsection{Conv2D}
+\begin{itemize}
+    \item 2D convolutional layer, used for processing image data
+    \item applies convolutional filters that move across input data to extract features
+    \item for feature extraction from images, such as edges, textures, etc.
+\end{itemize}
+
+\subsection{Conv2DTranspose}
+\begin{itemize}
+    \item inverse 2D convolutional layer, used for generating higher resolution images from lower resolution ones
+    \item for increasing the resolution of images
+    \item for reversing convolution operations
+\end{itemize}
+
+\subsection{ZeroPadding2D}
+\begin{itemize}
+    \item adds zero padding around the edges of input data
+    \item allows for controlling the size of the output image after applying a convolutional layer
+    \item for maintaining spatial size of input data after convolution
+\end{itemize}
+
+\subsection{LeakyReLU}
+\begin{itemize}
+    \item a variant of the ReLU activation function that allows for a small gradient when the unit is not activated (negative value)
+    \item for preventing the "vanishing gradients" problem
+\end{itemize}
+
+\subsection{InstanceNormalization / BatchNormalization}
+\begin{itemize}
+    \item normalizes input data for each sample independently
+    \item allows for stabilizing the training process and rapid convergence
+    \item for normalizing input features in neural networks, especially in generative models and image stylization
+\end{itemize}
+
+\subsection{ResizeLayer}
+\begin{itemize}
+    \item resizes input data to a specified dimension
+    \item for resizing images in neural networks (for standardizing input or output image sizes)
+\end{itemize}
+
+\end{document}
