@@ -101,5 +101,3 @@ This project wouldn't exist without the sources below. You can check them out fo
 ### Other
 - **tkinter** - GUI rendering
   - https://docs.python.org/3/library/tkinter.html
-- **Creating executable file from Python script** _(in Polish)_
-  - https://blog.roszczyk.net/python/python-tworzenie-plikow-wykonywalnych/
