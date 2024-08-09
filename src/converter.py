@@ -1,10 +1,9 @@
-import os
-
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
 from PIL import Image
+from os import remove as fremove
 
 from generator import CycleGenerator, SRGenerator
 
@@ -106,6 +105,6 @@ def upscale(img_name: str, original_img_path: str, style_converted_img_path: str
 
 def clean(tmp_path: str = "../tmp", keep_partial: bool = False, keep_converted_comparison: bool = False):
     if not keep_partial:
-        os.remove(tmp_path + "/partial.png")
+        fremove(tmp_path + "/partial.png")
     if not keep_converted_comparison:
-        os.remove(tmp_path + "/conversion.png")
+        fremove(tmp_path + "/conversion.png")

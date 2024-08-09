@@ -1,8 +1,8 @@
-import warnings
+from warnings import filterwarnings
 
 from gui import GUI
 
-warnings.filterwarnings("ignore")
+filterwarnings("ignore")
 
 if __name__ == "__main__":
     app = GUI()
