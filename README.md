@@ -9,27 +9,28 @@ The style-translated image is produced in _256x256_ resolution, then upscaled to
 
 ## Environment setup
 In order to run the application from **source code**, you can use **_conda_** to create the proper environment. \
-The following commands can be executed in the root directory of the project to create
-the **Python 3.10 virtual environment** with necessary packages:
+For this purpose, feel free to use one of the available `setup` scripts or have a look at them and replicate a similar environment on your own!
+
+#### Linux
 ```shell
-conda create -n Ganics python=3.10 -y
-conda activate Ganics
-conda install jupyter -y
-pip install -r requirements.txt
+chmod +x setup.sh
+./setup.sh         # configures the environment and extracts the datasets
+./setup.sh test    # does the same and additionally extracts the images for testing
 ```
-If you want to utilise your _NVIDIA GPU_, you should also execute the following command
-(provided that you have other essential software installed):
+
+#### Windows
 ```shell
-conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 -y
+.\setup.ps1        # configures the environment and extracts the datasets
+.\setup.ps1 test   # does the same and additionally extracts the images for testing
 ```
 After creating the environment, you can launch the application using this command:
 ```shell
 python src/main.py
 ```
-The application's GUI should now show up.
+The application's GUI should now show up. If it doesn't, you might have to install `tkinter` package.
 
-> **Note!** This application uses _tkinter_ for rendering the GUI! \
-> It might cause issues in some operating systems so make sure to check if you have it installed.
+> **Note!** This app uses Tensorflow **2.17** which is not supported on **Windows** operating system anymore. \
+> You can try installing **Tensorflow 2.10** to go around this but I don't guarantee everything will work properly.
 
 ## Model
 This project uses **CycleGANs** to translate the style of input image.
@@ -49,7 +50,7 @@ Context of each subfolder has been described below:
   - `Familyguy` (coming from _Cartoon Classification_ dataset) - frames taken from the _Family Guy_ series used for training the cartoon style
   - `natural_images` - images of different **natural scenes**
   - `VincentVanGogh` - images of **Vincent Van Gogh** art
-  - `how_to_get_datasets.md` - instructions on how to obtain datasets that I've used during learning process
+  - `info.md` - instructions on how to obtain datasets that I've used during learning process
     - **_You should check this file before trying to launch Jupyter notebooks!_**
 - `docs` - entire **documentation** of the project
   - `en` - _English_ version
