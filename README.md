@@ -1,4 +1,4 @@
-# Ganics
+# Ganics - GAN-based image style translation app
 Python application that translates the style of given input image to one of the following:
 - **Vincent Van Gogh art**
 - **Cartoon**
@@ -8,7 +8,7 @@ The style-translated image is produced in _256x256_ resolution, then upscaled to
 > **Note!** The output will always be **512x512 .png image**, no matter what the initial image resolution and format were.
 
 ## Environment setup
-In order to run the application from **source code**, you can use **_conda_** to create the proper environment. \
+In order to run the application from **source code**, you can use `conda` to create the proper environment. You can also utilise `venv` for this purpose. \
 For this purpose, feel free to use one of the available `setup` scripts or have a look at them and replicate a similar environment on your own!
 
 #### Linux
